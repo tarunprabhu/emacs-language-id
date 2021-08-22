@@ -2,7 +2,7 @@
 
 ;; Author: Lassi Kortela <lassi@lassi.io>
 ;; URL: https://github.com/lassik/emacs-language-id
-;; Version: 0.15.1
+;; Version: 0.16
 ;; Package-Requires: ((emacs "24") (cl-lib "0.5"))
 ;; Keywords: languages util
 ;; SPDX-License-Identifier: ISC
@@ -35,6 +35,16 @@
   '(
 
     ;;; Definitions that need special attention to precedence order.
+
+    ;; It is not uncommon for C++ mode to be used when writing Cuda.
+    ;; In this case, the only way to correctly identify Cuda is by
+    ;; looking at the extension.
+    ("Cuda"
+     c++-mode
+     (language-id--file-name-extension ".cu"))
+    ("Cuda"
+     c++-mode
+     (language-id--file-name-extension ".cuh"))
 
     ;; json-mode is derived from javascript-mode.
     ("JSON"
@@ -107,6 +117,7 @@
     ("CSS"
      css-mode
      (web-mode (web-mode-content-type "css") (web-mode-engine "none")))
+    ("Cuda" cuda-mode)
     ("D" d-mode)
     ("Dart" dart-mode)
     ("Dhall" dhall-mode)
@@ -116,6 +127,8 @@
     ("Emacs Lisp" emacs-lisp-mode)
     ("F#" fsharp-mode)
     ("Fish" fish-mode)
+    ("Fortran" fortran-mode)
+    ("Fortran Free Form" f90-mode)
     ("GLSL" glsl-mode)
     ("Go" go-mode)
     ("GraphQL" graphql-mode)
